@@ -1,4 +1,3 @@
-// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lab14/Equipos/equipo.dart';
@@ -9,7 +8,6 @@ class EquipoView extends StatefulWidget {
   const EquipoView({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _EquipoViewState createState() => _EquipoViewState();
 }
 
@@ -51,6 +49,7 @@ class _EquipoViewState extends State<EquipoView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Equipos'),
+        backgroundColor: Colors.blueAccent, // Color actualizado
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
@@ -66,7 +65,11 @@ class _EquipoViewState extends State<EquipoView> {
         itemBuilder: (context, index) {
           Equipo equipo = equipos[index];
           return Card(
-            elevation: 4.0,
+            elevation: 2.0, // Sombra más suave
+            margin: const EdgeInsets.only(bottom: 16.0), // Margen entre tarjetas
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0), // Bordes redondeados
+            ),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -75,23 +78,21 @@ class _EquipoViewState extends State<EquipoView> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'ID: ${equipo.id}',
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
+                      Text('Equipo: ${equipo.name}', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)), 
                       IconButton(
-                        icon: const Icon(Icons.delete),
+                        icon: const Icon(Icons.delete, color: Colors.red), // Icono de color actualizado
                         onPressed: () => deleteEquipo(equipo.id!),
                       ),
                     ],
                   ),
                   const SizedBox(height: 8.0),
-                  Text('Nombre: ${equipo.name}'),
                   const SizedBox(height: 8.0),
-                  Text('Año de Fundación: ${equipo.foundingYear}'),
+                  Text('Año de Fundación: ${equipo.foundingYear}', style: TextStyle(color: Colors.grey[600])), // Texto actualizado
                   const SizedBox(height: 8.0),
                   Text(
-                      'Última Fecha de Campeonato: ${DateFormat('yyyy-MM-dd').format(equipo.lastChampionshipDate)}'),
+                    'Última Fecha de Campeonato: ${DateFormat('yyyy-MM-dd').format(equipo.lastChampionshipDate)}',
+                    style: TextStyle(color: Colors.grey[600]), // Texto actualizado
+                  ),
                 ],
               ),
             ),
